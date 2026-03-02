@@ -1,8 +1,11 @@
 package controls;
 
 
+import org.springframework.stereotype.Component;
+
 import models.*;
 
+@Component
 public class PrintCommnent implements CommentNotificationProxy{
     
     @Override
