@@ -1,0 +1,23 @@
+services:
+  mysql-db:
+    image: mysql:lts
+    container_name: spring_demo_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword # Mật khẩu của tài khoản root (tối cao)
+      MYSQL_DATABASE: spring_demo_db    # Tên database sẽ tự động được tạo khi chạy
+      MYSQL_USER: demo_user             # Tài khoản dành riêng cho Spring Boot
+      MYSQL_PASSWORD: demo_password     # Mật khẩu của tài khoản demo_user
+    ports:
+      - "3306:3306" # Mở cổng 3306 ra máy tính thật để Spring Boot gọi vào
+    volumes:
+      - mysql_data:/var/lib/mysql       # Lưu lại dữ liệu xuống ổ cứng để tắt Docker không bị mất
+  adminer:
+    image: adminer:latest
+    container_name: spring_demo_adminer
+    ports:
+      - "8081:8080"
+    depends_on:
+      - mysql-db
+
+volumes:
+  mysql_data:
